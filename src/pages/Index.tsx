@@ -18,6 +18,13 @@ const Index = () => {
       color: 'text-primary'
     },
     {
+      id: 'freeride',
+      title: 'Свободный заезд',
+      icon: 'MapPin',
+      description: 'Исследуй карты без ограничений',
+      color: 'text-green-400'
+    },
+    {
       id: 'multiplayer',
       title: 'Мультиплеер',
       icon: 'Users',
@@ -64,11 +71,43 @@ const Index = () => {
       flag: '🇯🇵'
     },
     {
+      name: 'Toyota Supra',
+      country: 'Япония',
+      class: 'A',
+      power: '500 HP',
+      image: '🚙',
+      flag: '🇯🇵'
+    },
+    {
       name: 'Ford Mustang GT',
       country: 'США',
       class: 'A',
       power: '450 HP',
       image: '🚗',
+      flag: '🇺🇸'
+    },
+    {
+      name: 'Chevrolet Camaro',
+      country: 'США',
+      class: 'B',
+      power: '420 HP',
+      image: '🚘',
+      flag: '🇺🇸'
+    },
+    {
+      name: 'Dodge Ram 1500 (1994)',
+      country: 'США',
+      class: 'C',
+      power: '230 HP',
+      image: '🚚',
+      flag: '🇺🇸'
+    },
+    {
+      name: 'Ford Crown Victoria',
+      country: 'США',
+      class: 'B',
+      power: '250 HP',
+      image: '🚓',
       flag: '🇺🇸'
     },
     {
@@ -80,27 +119,19 @@ const Index = () => {
       flag: '🇩🇪'
     },
     {
-      name: 'Toyota Supra',
-      country: 'Япония',
-      class: 'A',
-      power: '500 HP',
-      image: '🚙',
-      flag: '🇯🇵'
-    },
-    {
-      name: 'Chevrolet Camaro',
-      country: 'США',
-      class: 'B',
-      power: '420 HP',
-      image: '🚘',
-      flag: '🇺🇸'
-    },
-    {
-      name: 'BMW M5',
+      name: 'BMW M3 E34',
       country: 'Германия',
       class: 'A',
-      power: '550 HP',
+      power: '286 HP',
       image: '🚕',
+      flag: '🇩🇪'
+    },
+    {
+      name: 'Audi Sport Quattro S1',
+      country: 'Германия',
+      class: 'S',
+      power: '450 HP',
+      image: '🚙',
       flag: '🇩🇪'
     }
   ];
@@ -208,7 +239,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-16">
           <h2 className="text-4xl font-black mb-8 text-center">Режимы игры</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 max-w-7xl mx-auto">
             {gameModes.map((mode) => (
               <Card 
                 key={mode.id}
@@ -226,6 +257,38 @@ const Index = () => {
             ))}
           </div>
         </section>
+
+        {activeMode === 'freeride' && (
+          <section className="container mx-auto px-4 py-8">
+            <Card className="bg-gradient-to-r from-green-900/20 to-green-700/20 border-green-500/30 backdrop-blur max-w-4xl mx-auto">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
+                    <Icon name="MapPin" size={32} className="text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-green-400 mb-1">Свободный заезд</h3>
+                    <p className="text-muted-foreground">Выбери карту и исследуй её без ограничений по времени</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {tracks.map((track, idx) => (
+                    <Card key={idx} className="bg-card/30 border-white/10 hover-scale cursor-pointer">
+                      <CardContent className="p-4">
+                        <div className="text-5xl mb-3 text-center">{track.icon}</div>
+                        <h4 className="font-bold text-center mb-2">{track.name}</h4>
+                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                          <Icon name="Cloud" size={14} />
+                          <span>{track.weather}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
 
         <section className="container mx-auto px-4 py-16">
           <h2 className="text-4xl font-black mb-8 text-center">Автомобили</h2>
